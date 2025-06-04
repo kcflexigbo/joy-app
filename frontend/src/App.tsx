@@ -36,7 +36,7 @@ function useReminder() {
           message: "Don't forget our dinner by 6 PM!",
           target_hour: 18,
           target_minute: 0,
-          sweet_messages: ["Thinking of you!",  "I'm waiting for you!", "I'm looking forward to seeing you!"]
+          sweet_messages: ["waiting for you", "tricia is a fish"]
         });
       });
   }, []); // Empty dependency array means this runs once on mount
@@ -52,7 +52,7 @@ function useReminder() {
 
         if (now >= dinnerTime) {
           setIsDinnerTime(true);
-          setTimeUntilDinner("It's 6 PM! Dinner time, my dear Joy!");
+          setTimeUntilDinner("It's 6 PM! Dinner time, Joy!");
         } else {
           setIsDinnerTime(false);
           const diff = dinnerTime.getTime() - now.getTime();
@@ -113,7 +113,7 @@ function App() {
         ) : (
           <>
             <h1>Hey Joy</h1>
-            <p className="message">Don't forget our special dinner by 6 PM!</p>
+            <p className="message">Don't forget dinner by 6 PM!</p>
           </>
         )}
       </header>
@@ -125,7 +125,7 @@ function App() {
           </div>
         ) : isDinnerTime ? (
           <div className="celebration">
-            <h2>Yay! Time for our wonderful dinner!</h2>
+            <h2>Time to go eat real food sha</h2>
             {/* Simple confetti animation */}
             <div className="confetti-container">
               {[...Array(20)].map((_, i) => (
