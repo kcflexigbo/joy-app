@@ -112,7 +112,7 @@ function App() {
           </>
         ) : (
           <>
-            <h1>Hey Joy,</h1>
+            <h1>Hey Joy</h1>
             <p className="message">Don't forget our special dinner by 6 PM!</p>
           </>
         )}
