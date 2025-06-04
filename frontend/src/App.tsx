@@ -17,7 +17,7 @@ function useReminder() {
 
   // Fetch reminder info from backend
   useEffect(() => {
-    fetch('http://supersecret.app.vtxhub.com/api/reminder_info') // Use the correct URL here
+    fetch('https://supersecret.app.vtxhub.com/api/reminder_info') // Use the correct URL here
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,10 +33,10 @@ function useReminder() {
         // Set default values if API fails
         setReminderInfo({
           greeting_name: "Hey Joy",
-          message: "Don't forget our special dinner by 6 PM!",
+          message: "Don't forget our dinner by 6 PM!",
           target_hour: 18,
           target_minute: 0,
-          sweet_messages: ["Thinking of you!"]
+          sweet_messages: ["Thinking of you!",  "I'm waiting for you!", "I'm looking forward to seeing you!"]
         });
       });
   }, []); // Empty dependency array means this runs once on mount

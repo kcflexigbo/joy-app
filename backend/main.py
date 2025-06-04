@@ -15,8 +15,8 @@ TARGET_MINUTE = 0
 SWEET_MESSAGES = [
     "Thinking of you!",
     "Can't wait to see you!",
-    "You make every moment special.",
-    "XOXO",
+    "Stop reading in the library sha",
+    "stop eating watermelon in the library"
     "Looking forward to our dinner!",
     "Time flies when I'm with you!"
 ]
