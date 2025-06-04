@@ -95,7 +95,7 @@ function App() {
     randomSweetMessage();
 
     // Update message every 5 seconds
-    const intervalId = setInterval(randomSweetMessage, 5000);
+    const intervalId = setInterval(randomSweetMessage, 8000);
 
     // Cleanup the interval on unmount or when reminderInfo changes
     return () => clearInterval(intervalId);
