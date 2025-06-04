@@ -1,35 +1,116 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface ReminderInfo {
+  greeting_name: string;
+  message: string;
+  target_hour: number;
+  target_minute: number;
+  sweet_messages: string[];
 }
 
-export default App
+function App() {
+  const [reminderInfo, setReminderInfo] = useState<ReminderInfo | null>(null);
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const [timeUntilDinner, setTimeUntilDinner] = useState<string>('');
+  const [isDinnerTime, setIsDinnerTime] = useState<boolean>(false);
+  const [sweetMessage, setSweetMessage] = useState<string>('');
+
+  // Fetch reminder info from backend
+  useEffect(() => {
+    fetch('http://localhost:8000/api/reminder_info')
+      .then(response => response.json())
+      .then(data => {
+        setReminderInfo(data);
+        // Set a random sweet message
+        if (data.sweet_messages && data.sweet_messages.length > 0) {
+          setSweetMessage(data.sweet_messages[
+            Math.floor(Math.random() * data.sweet_messages.length)
+          ]);
+        }
+      })
+      .catch(error => console.error('Error fetching reminder info:', error));
+  }, []);
+
+  // Update current time and calculate time until dinner
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      setCurrentTime(now);
+
+      if (reminderInfo) {
+        const dinnerTime = new Date(now);
+        dinnerTime.setHours(reminderInfo.target_hour, reminderInfo.target_minute, 0, 0);
+        
+        if (now >= dinnerTime) {
+          setIsDinnerTime(true);
+          setTimeUntilDinner("It's 6 PM! Dinner time,Joy");
+        } else {
+          setIsDinnerTime(false);
+          const diff = dinnerTime.getTime() - now.getTime();
+          const hours = Math.floor(diff / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+          setTimeUntilDinner(`${hours}h ${minutes}m ${seconds}s`);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [reminderInfo]);
+
+  return (
+    <div className="app">
+      <header className="header">
+        {reminderInfo ? (
+          <>
+            <h1>{reminderInfo.greeting_name},</h1>
+            <p className="message">{reminderInfo.message}</p>
+          </>
+        ) : (
+          <>
+            <h1>Hey Joy,</h1>
+            <p className="message">Don't forget our special dinner by 6 PM!</p>
+          </>
+        )}
+      </header>
+
+      <main className="countdown-container">
+        {isDinnerTime ? (
+          <div className="celebration">
+            <h2>Yay! Time for our wonderful dinner!</h2>
+            {/* Simple confetti animation */}
+            <div className="confetti-container">
+              {[...Array(20)].map((_, i) => (
+                <div 
+                  key={i} 
+                  className="confetti"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 2}s`,
+                    backgroundColor: [`red`, `blue`, `yellow`, `pink`, `purple`, `green`][
+                      Math.floor(Math.random() * 6)
+                    ]
+                  }}
+                ></div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="countdown">
+            <h2>Time until dinner:</h2>
+            <div className="timer">{timeUntilDinner}</div>
+          </div>
+        )}
+      </main>
+
+      {sweetMessage && (
+        <footer className="footer">
+          <p className="sweet-message">{sweetMessage}</p>
+        </footer>
+      )}
+    </div>
+  );
+}
+
+export default App;

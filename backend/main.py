@@ -6,7 +6,7 @@ import random
 app = FastAPI()
 
 # Personalized information for Joy
-GREETING_NAME = "My Dearest Joy"
+GREETING_NAME = "Hey Joy"
 REMINDER_MESSAGE = "Don't forget our special dinner by 6 PM!"
 TARGET_HOUR = 18  # 6 PM in 24-hour format
 TARGET_MINUTE = 0

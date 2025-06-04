@@ -52,3 +52,70 @@ export default tseslint.config({
   },
 })
 ```
+
+# Joy's Dinner Reminder
+
+A simple, friendly, and slightly romantic webpage for Joy that reminds her about dinner at 6 PM with a live countdown and some charming touches.
+
+## Overview
+
+This React application serves as a reminder for Joy about dinner at 6 PM. It displays:
+- A personalized greeting
+- A warm reminder message
+- A real-time countdown timer to 6:00 PM
+- A celebration animation when it's time for dinner
+- Rotating sweet nothing messages
+
+The application fetches personalized information from a FastAPI backend, including the greeting, reminder message, and target time.
+
+## Features
+
+### Personalized Greeting
+Displays an affectionate greeting for Joy with a warm message about the upcoming dinner.
+
+### Countdown Timer
+Shows a real-time countdown to 6:00 PM using local time, updating every second with remaining time in HH:MM:SS format.
+
+### Celebration at Dinner Time
+When the countdown reaches zero, the timer changes to a celebratory message with a gentle confetti animation.
+
+### Sweet Nothing Messages
+Features rotating short, sweet messages in the footer that change periodically, adding to the romantic atmosphere.
+
+### Romantic Design
+Uses soft color gradients and tasteful animations to create a charming user experience without being overwhelming.
+
+## Getting Started
+
+### Prerequisites
+- Node.js and npm installed
+- Backend FastAPI server running
+
+### Installation
+
+1. **Clone the repository** (or access the project files)
+2. **Navigate to the frontend directory**
+   ```bash
+   cd path/to/frontend
+   ```
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+```
+frontend/
+├── index.html              # Main HTML file
+├── src/
+│   ├── App.tsx             # Main React component
+│   ├── App.css             # Styles for the App component
+│   ├── index.css           # Global styles
+│   └── main.tsx            # Entry point for the React application
+├── README.md               # This file
+└── other configuration files
+```
