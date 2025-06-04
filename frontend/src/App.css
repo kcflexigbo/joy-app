@@ -98,7 +98,7 @@ h2 {
   font-style: italic;
   color: #9b59b6;
   font-size: 1.2rem;
-  animation: fadeInOut 5s infinite;
+  animation: fadeInOut 4s infinite;
 }
 
 @keyframes fadeInOut {
