@@ -6,19 +6,15 @@ import random
 app = FastAPI()
 
 # Personalized information for Joy
-GREETING_NAME = "Hey Joy"
-REMINDER_MESSAGE = "Don't forget our special dinner by 6 PM!"
+GREETING_NAME = "Hey Joy..."
+REMINDER_MESSAGE = "Don't forget our dinner by 6 PM!"
 TARGET_HOUR = 18  # 6 PM in 24-hour format
 TARGET_MINUTE = 0
 
 # Optional sweet nothing messages for FR_FUN2
 SWEET_MESSAGES = [
-    "Thinking of you!",
-    "Can't wait to see you!",
     "Stop reading in the library sha",
-    "stop eating watermelon in the library"
-    "Looking forward to our dinner!",
-    "Time flies when I'm with you!"
+    "stop eating watermelon in the library",
 ]
 
 @app.get("/api/reminder_info")

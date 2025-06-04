@@ -79,19 +79,27 @@ function App() {
   const { reminderInfo, timeUntilDinner, isDinnerTime } = useReminder();
   const [sweetMessage, setSweetMessage] = useState<string>('');
 
-  // This useEffect should now handle fetching and setting sweet message
-  // and only use the setReminderInfo returned from the hook if you need to manually set it.
-  // However, the useReminder hook already fetches reminderInfo, so this might be redundant.
-  // Let's assume you want to fetch it again or specifically set sweet messages here.
+  // Handle fetching and setting sweet message with periodic updates
   useEffect(() => {
-    if (reminderInfo && reminderInfo.sweet_messages && reminderInfo.sweet_messages.length > 0) {
-      setSweetMessage(reminderInfo.sweet_messages[
-        Math.floor(Math.random() * reminderInfo.sweet_messages.length)
-      ]);
-    } else {
+    if (!reminderInfo || !reminderInfo.sweet_messages || reminderInfo.sweet_messages.length === 0) {
       setSweetMessage("Looking forward to seeing you!");
+      return;
     }
-  }, [reminderInfo]); // Run this effect when reminderInfo changes
+
+    const randomSweetMessage = () => {
+      const randomIndex = Math.floor(Math.random() * reminderInfo.sweet_messages.length);
+      setSweetMessage(reminderInfo.sweet_messages[randomIndex]);
+    };
+
+    // Set initial message
+    randomSweetMessage();
+
+    // Update message every 5 seconds
+    const intervalId = setInterval(randomSweetMessage, 5000);
+
+    // Cleanup the interval on unmount or when reminderInfo changes
+    return () => clearInterval(intervalId);
+  }, [reminderInfo]);
 
 
   return (
