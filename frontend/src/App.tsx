@@ -107,7 +107,7 @@ function App() {
       <header className="header">
         {reminderInfo ? (
           <>
-            <h1>{reminderInfo.greeting_name},</h1>
+            <h1>{reminderInfo.greeting_name}</h1>
             <p className="message">{reminderInfo.message}</p>
           </>
         ) : (

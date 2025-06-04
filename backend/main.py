@@ -14,7 +14,11 @@ TARGET_MINUTE = 0
 # Optional sweet nothing messages for FR_FUN2
 SWEET_MESSAGES = [
     "Stop reading in the library sha",
-    "stop eating watermelon in the library",
+    "Stop eating watermelon in the library",
+    "You still have the remaining day to read",
+    "Don't be an Amaka...",
+    "Writing code..........",
+    "Tricia is a goat.............."
 ]
 
 @app.get("/api/reminder_info")
