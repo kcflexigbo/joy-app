@@ -36,7 +36,14 @@ function useReminder() {
           message: "Don't forget our dinner by 6 PM!",
           target_hour: 18,
           target_minute: 0,
-          sweet_messages: ["waiting for you", "tricia is a fish"]
+          sweet_messages: [
+            "Stop reading in the library sha",
+            "Stop eating watermelon in the library",
+            "You still have the remaining day to read",
+            "Don't be an Amaka...",
+            "Writing code..........",
+            "Tricia is a goat.............."
+        ]
         });
       });
   }, []); // Empty dependency array means this runs once on mount
